@@ -195,9 +195,11 @@
 | 类型检查 | `node node_modules/typescript/bin/tsc -b --pretty false` | 退出码 0 |
 | 单测 | `node node_modules/vitest/vitest.mjs run tests/codex-notifications.spec.ts` | 24 passed |
 | 构建 | `node node_modules/tsdown/dist/run.mjs` | `lib/index.js` 355 B、`lib/client.js` 116,394 B（gzip 70.27 kB，比 0.1.9 少 417 kB，因为不再内联第三方 WAV） |
-| 打包 | `npm pack` | `local-dsh-task-notifications-0.1.10.tgz`，362,529 B，56 个文件 |
+| 覆盖率 | `node node_modules/vitest/vitest.mjs run --coverage` | 53.48 statements / 55.68 branches / 37.17 functions / 58.19 lines；阈值在 `vitest.config.ts` 按本分支实测值重新基线化（50/52/35/55） |
+| 打包 | `npm pack` | `local-dsh-task-notifications-0.1.10.tgz`，362,512 B，56 个文件 |
 
-- 包 SHA-256：`d3fd10204185cdf77c990376a4d7b530de6c7a49ca922f5c521b3ca37179dd6d`；SHA-1：`063c57c45d28b849781e3497979afe7a6a315b25`。
+- 包 SHA-256：`935fa392cc4b12ab41567c33a9a8754ababeb43a10f037e189e5cec1abca7500`。
+- 许可证结构已复原为完整 BSD-3-Clause（版权行两条：上游 contributors 与本分支 Jimmy-Official），`private` 置为 `false`，`scripts/check-package.cjs` 本地通过。
 - 音源替换：`scripts/generate-tones.mjs` 合成 `default-notify.wav`（34,442 B，sha256 `68ed872f7323e30e8de38d7e5ba3efbe4c975a6c7a81419a1c12e95e885f4e8d`）与 `classic-notify.wav`（28,268 B，sha256 `d522805dedbcb7e29f035379523bf8797c942f27a685e444568b8284844f55a0`）；原 `codex-notification.wav` / `codex-classic.wav` 已删除，`src/client/sounds.ts` 由 501,109 字符降到 83,823 字符。
 - 产物取证：tgz 内 `package.json` 版本 0.1.10、`repository` 指向 `Jimmy-Official/dsh-task-notifications`、peer 为 `^0.2.0-rc.2 || ^0.2.1-rc.1`；`package/lib/client.js` 内 `uiWorkspace` 1 处、`UklGR` 2 处（两段合成音）、不含 `codex-notification`/`codex-classic`。
 - **未覆盖**：0.1.10 未安装进 Desktop；没有任何真实桌面点击证据；「点击跳转」自 0.1.5、0.1.8 两次负面实测后仍未复测。

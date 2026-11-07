@@ -7,7 +7,7 @@
   },
   "packageManager": "pnpm@10.34.5",
   "description": "Codex-style desktop notifications for DeepSeek Harness: task completion, approval requests, questions and custom sounds.",
-  "private": true,
+  "private": false,
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
