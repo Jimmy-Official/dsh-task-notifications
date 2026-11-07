@@ -1,12 +1,13 @@
 {
-  "name": "@ltao0829/dsh-task-notify",
-  "version": "0.3.0",
+  "name": "@local/dsh-task-notifications",
+  "version": "0.1.10",
   "engines": {
     "node": ">=22.0.0",
-    "dsh": "^0.2.0-rc.2"
+    "dsh": "^0.2.0-rc.2 || ^0.2.1-rc.1"
   },
   "packageManager": "pnpm@10.34.5",
-  "description": "Task-completion reminder for DeepSeek Harness 0.2: in-page toast, OS notification, and sound when an agent turn or background job finishes",
+  "description": "Codex-style desktop notifications for DeepSeek Harness: task completion, approval requests, questions and custom sounds.",
+  "private": true,
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -28,7 +29,6 @@
     },
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-api-job-controller",
         "@deepseek-ai/dsh-api-session-controller",
         "@deepseek-ai/dsh-client-locale",
         "@deepseek-ai/dsh-client-store",
@@ -43,26 +43,24 @@
     "build": "tsc -b && tsdown",
     "prepublishOnly": "tsc -b && tsdown",
     "typecheck": "tsc -b --pretty false",
-    "test": "vitest run",
+    "test": "vitest run tests/codex-notifications.spec.ts",
     "coverage": "vitest run --coverage",
     "verify:profile": "node scripts/verify-disposable-profile.cjs",
     "watch": "tsdown --watch"
   },
   "license": "BSD-3-Clause",
   "peerDependencies": {
-    "@deepseek-ai/dsh-api-job-controller": "^0.2.0-rc.2",
-    "@deepseek-ai/dsh-api-session-controller": "^0.2.0-rc.2",
-    "@deepseek-ai/dsh-client-locale": "^0.2.0-rc.2",
-    "@deepseek-ai/dsh-client-store": "^0.2.0-rc.2",
-    "@deepseek-ai/dsh-client-ui-renderer": "^0.2.0-rc.2",
-    "@deepseek-ai/dsh-client-ui-session": "^0.2.0-rc.2",
-    "@deepseek-ai/dsh-client-ui-settings": "^0.2.0-rc.2",
-    "@deepseek-ai/dsh-client-ui-slots": "^0.2.0-rc.2",
+    "@deepseek-ai/dsh-api-session-controller": "^0.2.0-rc.2 || ^0.2.1-rc.1",
+    "@deepseek-ai/dsh-client-locale": "^0.2.0-rc.2 || ^0.2.1-rc.1",
+    "@deepseek-ai/dsh-client-store": "^0.2.0-rc.2 || ^0.2.1-rc.1",
+    "@deepseek-ai/dsh-client-ui-renderer": "^0.2.0-rc.2 || ^0.2.1-rc.1",
+    "@deepseek-ai/dsh-client-ui-session": "^0.2.0-rc.2 || ^0.2.1-rc.1",
+    "@deepseek-ai/dsh-client-ui-settings": "^0.2.0-rc.2 || ^0.2.1-rc.1",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.2.0-rc.2 || ^0.2.1-rc.1",
     "react": "^18.2.0"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "~4.0.4",
-    "@deepseek-ai/dsh-api-job-controller": "0.2.0-rc.2",
     "@deepseek-ai/dsh-api-session-controller": "0.2.0-rc.2",
     "@deepseek-ai/dsh-client-locale": "0.2.0-rc.2",
     "@deepseek-ai/dsh-client-store": "0.2.0-rc.2",
@@ -73,6 +71,7 @@
     "@deepseek-ai/dsh-package-manifest": "0.2.0-rc.2",
     "@types/node": "^22.20.0",
     "@types/react": "~18.3.1",
+    "@types/react-dom": "18.3.0",
     "@vitest/coverage-v8": "4.1.11",
     "jsdom": "^26.0.0",
     "lightningcss": "^1.32.0",
@@ -96,6 +95,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ltao0829/dsh-task-notify.git"
+    "url": "git+https://github.com/Jimmy-Official/dsh-task-notifications.git"
+  },
+  "homepage": "https://github.com/Jimmy-Official/dsh-task-notifications#readme",
+  "bugs": {
+    "url": "https://github.com/Jimmy-Official/dsh-task-notifications/issues"
   }
 }

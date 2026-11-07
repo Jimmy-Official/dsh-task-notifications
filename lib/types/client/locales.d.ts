@@ -1,129 +1,46 @@
-/**
- * The `task-notify` namespace dictionaries: copy for the reminder channels and
- * the plugin settings page.
- *
- * DSH 0.2 types a slot's `t` seat from the namespace its registration declares,
- * so this module also owns the `LocaleNamespaceMap` merge that makes the key
- * union below the compile-time contract of every `t(...)` call site.
- */
-/** Simplified Chinese dictionary (the key-set source of truth). */
 export declare const zh: {
-    'settings.title': string;
-    'settings.description': string;
-    'settings.enabled': string;
-    'settings.enabledHint': string;
-    'settings.turn': string;
-    'settings.turnHint': string;
-    'settings.job': string;
-    'settings.jobHint': string;
-    'settings.allSessions': string;
-    'settings.allSessionsHint': string;
-    'settings.review': string;
-    'settings.reviewHint': string;
-    'settings.failure': string;
-    'settings.failureHint': string;
-    'settings.browser': string;
-    'settings.browserHint': string;
-    'settings.soundMode': string;
-    'settings.soundModeHint': string;
-    'settings.soundOff': string;
-    'settings.soundSingle': string;
-    'settings.soundDouble': string;
-    'settings.soundCustom': string;
-    'settings.soundUrl': string;
-    'settings.soundUrlHint': string;
-    'settings.volume': string;
-    'settings.toastPosition': string;
-    'settings.toastPositionHint': string;
-    'settings.toastBottomRight': string;
-    'settings.toastBottomLeft': string;
-    'settings.toastTopRight': string;
-    'settings.toastTopLeft': string;
-    'settings.toastSeconds': string;
-    'settings.toastSecondsHint': string;
-    'settings.templateTitle': string;
-    'settings.templateBody': string;
-    'settings.templateHint': string;
-    'settings.quietEnabled': string;
-    'settings.quietEnabledHint': string;
-    'settings.quietFrom': string;
-    'settings.quietTo': string;
-    'settings.mutedSessions': string;
-    'settings.mutedSessionsHint': string;
-    'event.turn': string;
-    'event.jobCompleted': string;
-    'event.jobFailed': string;
-    'event.jobKilled': string;
-    'event.review': string;
-    'event.failure': string;
-    'review.approval': string;
-    'review.planReview': string;
-    'review.question': string;
+    readonly nav: "任务通知";
+    readonly title: "通知";
+    readonly completion: "轮次完成通知";
+    readonly completionHint: "设置 DSH 完成后何时提醒你";
+    readonly unfocused: "仅在未聚焦时";
+    readonly always: "始终";
+    readonly off: "关闭";
+    readonly permission: "启用权限通知";
+    readonly permissionHint: "在需要通知权限时显示提醒";
+    readonly question: "启用问题通知";
+    readonly questionHint: "在需要回答问题才能继续时显示通知";
+    readonly sound: "通知提示音";
+    readonly soundHint: "任务完成、请求权限和提问时的提示音";
+    readonly default: "默认";
+    readonly classic: "经典";
+    readonly custom: "自定义…";
+    readonly none: "无";
+    readonly customHint: "导入你自己的提示音，只保存在本机浏览器";
+    readonly customEmpty: "未选择文件";
+    readonly customChoose: "选择文件";
+    readonly customReplace: "更换文件";
+    readonly customPreview: "试听";
+    readonly customRemove: "移除";
+    readonly customReading: "读取中…";
+    readonly customTooLarge: "文件太大（上限 1 MB）";
+    readonly customUnsupported: "请选择音频文件";
+    readonly customEmptyFile: "文件是空的";
+    readonly customUnreadable: "读取失败，换个文件试试";
+    readonly customUnplayable: "这个文件无法播放";
+    readonly customQuota: "浏览器存储空间不足，换个小一点的音频";
+    readonly turnTitle: "DSH 任务已完成";
+    readonly turnBodyFallback: "任务已完成，点击查看对话";
+    readonly permissionTitle: "DSH 需要权限";
+    readonly questionTitle: "DSH 需要你回答问题";
+    readonly jumpFailed: "没能切换到该对话，请手动在左侧列表里选择";
 };
-/** The task-notify key union — the exact key domain of every `t(...)` call. */
-export type SettingsCardKey = keyof typeof zh;
-/** English dictionary, checked complete against the zh key set. */
-export declare const en: {
-    'settings.title': string;
-    'settings.description': string;
-    'settings.enabled': string;
-    'settings.enabledHint': string;
-    'settings.turn': string;
-    'settings.turnHint': string;
-    'settings.job': string;
-    'settings.jobHint': string;
-    'settings.allSessions': string;
-    'settings.allSessionsHint': string;
-    'settings.review': string;
-    'settings.reviewHint': string;
-    'settings.failure': string;
-    'settings.failureHint': string;
-    'settings.browser': string;
-    'settings.browserHint': string;
-    'settings.soundMode': string;
-    'settings.soundModeHint': string;
-    'settings.soundOff': string;
-    'settings.soundSingle': string;
-    'settings.soundDouble': string;
-    'settings.soundCustom': string;
-    'settings.soundUrl': string;
-    'settings.soundUrlHint': string;
-    'settings.volume': string;
-    'settings.toastPosition': string;
-    'settings.toastPositionHint': string;
-    'settings.toastBottomRight': string;
-    'settings.toastBottomLeft': string;
-    'settings.toastTopRight': string;
-    'settings.toastTopLeft': string;
-    'settings.toastSeconds': string;
-    'settings.toastSecondsHint': string;
-    'settings.templateTitle': string;
-    'settings.templateBody': string;
-    'settings.templateHint': string;
-    'settings.quietEnabled': string;
-    'settings.quietEnabledHint': string;
-    'settings.quietFrom': string;
-    'settings.quietTo': string;
-    'settings.mutedSessions': string;
-    'settings.mutedSessionsHint': string;
-    'event.turn': string;
-    'event.jobCompleted': string;
-    'event.jobFailed': string;
-    'event.jobKilled': string;
-    'event.review': string;
-    'event.failure': string;
-    'review.approval': string;
-    'review.planReview': string;
-    'review.question': string;
-};
-/** Dictionary namespace owned by this plugin. */
-export declare const NS = "task-notify";
-/** Namespace-bound translate function shape used across this plugin. */
-export type TaskNotifyTranslate = (key: SettingsCardKey, params?: Record<string, unknown>) => string;
+export type LocaleKey = keyof typeof zh;
+export declare const en: Record<LocaleKey, string>;
+export declare const NS = "dsh-task-notifications";
 declare module '@deepseek-ai/dsh-client-ui-slots' {
     interface LocaleNamespaceMap {
-        /** task-notify settings-page and toast copy. */
-        'task-notify': SettingsCardKey;
+        'dsh-task-notifications': LocaleKey;
     }
 }
 //# sourceMappingURL=locales.d.ts.map

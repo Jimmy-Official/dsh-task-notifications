@@ -1,0 +1,1 @@
+{"version":3,"file":"shouldNotify.d.ts","sourceRoot":"","sources":["../../../src/client/shouldNotify.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,cAAc,CAAA;AACnD,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,eAAe,CAAA;AAE7D,kGAAkG;AAClG,wBAAgB,YAAY,CAAC,KAAK,EAAE,eAAe,EAAE,QAAQ,EAAE,wBAAwB,EAAE,OAAO,EAAE,OAAO,GAAG,OAAO,CAQlH"}

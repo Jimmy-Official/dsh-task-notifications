@@ -15,7 +15,7 @@ const os = require('node:os');
 const http = require('node:http');
 
 const isWin = process.platform === 'win32';
-const dshBin = isWin ? 'dsh.cmd' : 'dsh';
+const dshBin = process.env.DSH_VERIFY_BIN || (isWin ? 'dsh.cmd' : 'dsh');
 const pnpmBin = isWin ? 'pnpm.cmd' : 'pnpm';
 const webStartTimeoutMs = Number.parseInt(process.env.DSH_WEB_START_TIMEOUT_MS || '90000', 10);
 const pluginInstallTimeoutMs = Number.parseInt(process.env.DSH_PLUGIN_INSTALL_TIMEOUT_MS || '300000', 10);
@@ -52,6 +52,15 @@ function killProcessTree(child) {
       // ignore
     }
   }
+}
+
+function removeOwnedTemp(target, expectedPrefix) {
+  const resolved = fs.realpathSync(target);
+  const tempRoot = fs.realpathSync(os.tmpdir());
+  if (path.dirname(resolved) !== tempRoot || !path.basename(resolved).startsWith(expectedPrefix)) {
+    throw new Error(`refusing to remove an unexpected verification path: ${resolved}`);
+  }
+  fs.rmSync(resolved, { recursive: true, force: true });
 }
 
 /**
@@ -380,10 +389,10 @@ async function verifyDisposableProfile() {
       try { fs.unlinkSync(tarballPath); } catch {}
     }
     if (fs.existsSync(tempHome)) {
-      try { fs.rmSync(tempHome, { recursive: true, force: true }); } catch {}
+      try { removeOwnedTemp(tempHome, 'dsh-disposable-profile-'); } catch {}
     }
     if (typeof extractDir === 'string' && fs.existsSync(extractDir)) {
-      try { fs.rmSync(extractDir, { recursive: true, force: true }); } catch {}
+      try { removeOwnedTemp(extractDir, 'dsh-bundle-'); } catch {}
     }
     console.log('Cleaned up disposable profile and temporary artifacts.');
   }

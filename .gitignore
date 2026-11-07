@@ -6,3 +6,4 @@ lib/tsconfig.tsbuildinfo
 *.tgz
 # vitest --coverage output (text/lcov/html); CI uploads lcov as an artifact instead.
 coverage/
+install-backup/

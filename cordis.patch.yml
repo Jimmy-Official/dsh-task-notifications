@@ -6,4 +6,4 @@
 # the dsh.client declaration in package.json.
 - insert:
     - id: task-notify
-      name: '@ltao0829/dsh-task-notify'
+      name: '@local/dsh-task-notifications'

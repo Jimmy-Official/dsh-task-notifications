@@ -1,53 +1,11 @@
-/**
- * Reminder rendering — a self-contained DOM toast plus optional browser
- * (OS-level) notification and a configurable sound.
- *
- * No React and no slot dependency: the toast mounts directly on document.body
- * so a reminder still works on screens with no Conversation seat (no Session
- * selected, settings panel open, and so on). DSH 0.2 exposes a `shell.overlay`
- * seat for frame-wide floating layers, but that seat is Session-agnostic only
- * in principle — occupying it costs a React root and a slot registration for
- * what is a transient, dismissable banner.
- *
- * Every option degrades quietly: a bad template falls back to the built-in
- * copy, a broken custom sound to silence, and every rendered string goes
- * through `textContent`, so a template can never inject markup.
- * @module @ltao0829/dsh-task-notify/client/notify
- */
-import type { CompletionEvent } from '../detect.ts';
-import type { SoundMode, ToastPosition } from './settings.ts';
-import type { TaskNotifyTranslate } from './locales.ts';
-/** Notification channels and presentation options the watcher may use. */
-export interface NotifyOptions {
-    /** Whether to send a browser Notification, when permission is granted. */
-    browser: boolean;
-    /** Which sound to play (`'off'` plays nothing). */
-    sound: SoundMode;
-    /** Audio URL for `sound: 'custom'`; an empty URL falls back to the built-in two-tone. */
-    soundUrl?: string;
-    /** Sound volume `0`–`1`; out-of-range or junk values are clamped. */
-    volume?: number;
-    /** Screen corner the toasts dock to. */
-    toastPosition?: ToastPosition;
-    /** Seconds a toast stays on screen, clamped to `3`–`15`. */
-    toastSeconds?: number;
-    /** Title template; empty or blank uses the built-in localized title. */
-    templateTitle?: string;
-    /** Body template; empty or blank uses the built-in localized body. */
-    templateBody?: string;
-}
-/** Fire every enabled channel for one completion event. */
-export declare function notifyEvent(event: CompletionEvent, options: NotifyOptions, t: TaskNotifyTranslate): void;
-/**
- * Request browser-notification permission. Must be called from a user gesture
- * (the settings card's save handler does this when the toggle is enabled).
- * @returns the resulting permission state.
- */
-export declare function requestBrowserNotificationPermission(): Promise<NotificationPermission>;
-/**
- * Unlock audio on the first user gesture. Web Audio starts suspended until a
- * gesture, so a reminder that fires before the user has clicked would
- * otherwise be silent even after they enable the sound toggle.
- */
-export declare function ensureAudioUnlock(): void;
+import { type CustomSound } from './customSound.ts';
+/** Records one step of the reminder path so a failed click can be diagnosed from disk afterwards. */
+export declare function diag(step: string): void;
+import type { SoundMode } from './settings.ts';
+export declare function armNotificationPermission(): void;
+/** Resolves the audio source for a mode; a custom sound that is missing falls back to the bundled default. */
+export declare function soundSource(mode: SoundMode, custom: CustomSound | null): string | null;
+/** A short, non-actionable message in the corner; used when a jump target cannot be opened. */
+export declare function showMessage(text: string): void;
+export declare function showNotification(title: string, body: string, sound: SoundMode, activate?: () => void): void;
 //# sourceMappingURL=notify.d.ts.map
